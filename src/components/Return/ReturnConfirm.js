@@ -11,7 +11,10 @@ const ReturnConfirm = () => {
             <Modal.Header closeButton>
                <Modal.Title>Return a product</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Return confirm</Modal.Body>
+            <Modal.Body>
+               Your total price $000 <br />
+               Do you want to procedure?
+            </Modal.Body>
             <Modal.Footer>
                <Button variant="primary" onClick={handleReturnCloseConfirm}>
                   Confirm

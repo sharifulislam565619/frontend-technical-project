@@ -1,10 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Select from 'react-select';
 import { ContextProvider } from "../../Context/Context";
 
 const Booking = () => {
-   const { show, handleClose, bookConfirm } = useContext(ContextProvider)
+   const { show, handleClose, bookConfirm, setTotalPrice } = useContext(ContextProvider)
+
+   const [price, setPrice] = useState(0)
+   const [fromDate, setFromDate] = useState()
+   const [toDate, setToDate] = useState()
+   const [day, setDay] = useState(1)
+   const handleFromDate = (e) => {
+      setFromDate(e.target.value)
+   }
+   const handleToDate = (e) => {
+      setToDate(e.target.value);
+   }
+   const handlePrice = (e) => {
+      setPrice(e.value)
+
+   }
+
+   const handleDay = (toDate, fromDate) => {
+      const date1 = new Date(toDate);
+      const date2 = new Date(fromDate);
+      const diffTime = Math.abs(date2 - date1);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      console.log(diffDays);
+      setDay(diffDays)
+   }
+   const handleTotalPrice = (price, day) => {
+      setTotalPrice(price * day)
+   }
+
 
    const options = [
       { value: 4500, label: 'Air Compressor 12 GAS / p1' },
@@ -28,32 +56,37 @@ const Booking = () => {
 
    return (
 
-      <Modal show={show} animation={false}>
-         <Modal.Header closeButton>
-            <Modal.Title>Book a product</Modal.Title>
-         </Modal.Header>
-         <Modal.Body>
+      <>
+         <Modal show={show} animation={false}>
+            <Modal.Header closeButton>
+               <Modal.Title>Book a product</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
 
-            <Select className="mb-3" options={options} />
+               <Select onChange={handlePrice} defaultValue={options?.[0]} className="mb-3" options={options} />
 
-            <div className="">
-               <small className="d-flex">
-                  <span className="px-2">From</span><input type="date" />
-                  <span className="px-2" >To</span><input type="date" />
-               </small>
-            </div>
-         </Modal.Body>
-         <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-               No
-            </Button>
-            <Button variant="primary" onClick={bookConfirm}>
-               Yes
-            </Button>
-         </Modal.Footer>
-      </Modal>
+               <div className="">
+                  <small className="d-flex">
+                     <span className="px-2">From</span><input onChange={handleFromDate} type="date" />
+                     <span className="px-2" >To</span><input onChange={handleToDate} type="date" />
+                  </small>
+               </div>
+            </Modal.Body>
+            <Modal.Footer>
+               <Button variant="secondary" onClick={handleClose}>
+                  No
+               </Button>
+               <Button variant="primary" onClick={() => { bookConfirm(); handleTotalPrice(price, day); handleDay(toDate, fromDate) }}>
+                  Yes
+               </Button>
+            </Modal.Footer>
+         </Modal>
+
+      </>
 
    );
 };
 
 export default Booking;
+
+

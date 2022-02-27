@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { ContextProvider } from '../../Context/Context';
 
 const BookingConfirm = () => {
-   const { show2, handleCloseConfirm, bookConfirm } = useContext(ContextProvider)
+   const { show2, handleCloseConfirm, bookConfirm, totalPrice } = useContext(ContextProvider)
    return (
       <>
          <Modal show={show2} onHide={bookConfirm} animation={false}>
@@ -11,7 +11,7 @@ const BookingConfirm = () => {
                <Modal.Title>Book a product</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-               Your estimate price is $5000 <br />
+               Your estimate price is ${totalPrice} <br />
                Do you want to procedure?
             </Modal.Body>
             <Modal.Footer>

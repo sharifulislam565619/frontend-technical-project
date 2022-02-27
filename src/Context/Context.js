@@ -3,6 +3,8 @@ import React, { createContext, useState } from 'react';
 export const ContextProvider = createContext()
 
 const Context = ({ children }) => {
+   const [totalPrice, setTotalPrice] = useState(0)
+
    // Booking
    const [show, setShow] = useState(false);
    const [show2, setShow2] = useState(false);
@@ -28,7 +30,7 @@ const Context = ({ children }) => {
 
 
    return (
-      <ContextProvider.Provider value={{ handleShow, show, show2, handleClose, handleCloseConfirm, bookConfirm, showReturn, handleShowReturn, showReturnConfirm, handleReturnConfirm, handleCloseReturn, handleReturnCloseConfirm }}>
+      <ContextProvider.Provider value={{ handleShow, show, show2, handleClose, handleCloseConfirm, bookConfirm, showReturn, handleShowReturn, showReturnConfirm, handleReturnConfirm, handleCloseReturn, handleReturnCloseConfirm, totalPrice, setTotalPrice }}>
          {children}
       </ContextProvider.Provider>
    );

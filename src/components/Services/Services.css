@@ -1,0 +1,14 @@
+.head-row th {
+  border-right-color: #ffffff;
+}
+
+.search-input {
+  width: 25%;
+}
+
+@media (max-width: 850px) {
+  .search-input {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=Services.css.map */

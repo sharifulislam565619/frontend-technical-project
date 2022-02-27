@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,SAAS,CAAC;EACR,mBAAmB,EAAE,MAAM;CAI5B;;AALD,AAEE,SAFO,CAEP,EAAE,CAAC;EACD,kBAAkB,EAAE,KAAK;CAC1B;;AAEH,AAAA,SAAS,CAAC;EACR,kBAAkB,EAAE,MAAM;CAC3B",
+    "sources": [
+        "Service.scss"
+    ],
+    "names": [],
+    "file": "Service.css"
+}

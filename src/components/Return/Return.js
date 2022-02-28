@@ -1,10 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Select from 'react-select';
 import { ContextProvider } from '../../Context/Context';
 
 const Return = () => {
-   const { showReturn, handleCloseReturn, handleReturnConfirm } = useContext(ContextProvider)
+   const { showReturn, handleCloseReturn, handleReturnConfirm, setTotalPrice } = useContext(ContextProvider)
+
+   const [price, setPrice] = useState(0)
+   const [useDay, setUseDay] = useState(0)
+
+
+   const handlePrice = (e) => {
+      setPrice(e.value)
+   }
+   const handleUseDay = (e) => setUseDay(e.target.value);
+
+   const handleTotalPrice = () => {
+      setTotalPrice(price * useDay)
+   }
+
 
    const options = [
       { value: 4500, label: 'Air Compressor 12 GAS / p1' },
@@ -33,16 +47,16 @@ const Return = () => {
                <Modal.Title>Return a product</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-               <Select defaultValue={options?.[0]} className="mb-3" options={options} />
+               <Select onChange={handlePrice} defaultValue={options?.[0]} className="mb-3" options={options} />
                <div>
-                  <input className='px-2' placeholder='Used mileage' type="number" name="" id="" />
+                  <input className='px-2' placeholder='Used mileage' onChange={handleUseDay} type="number" name="" id="" />
                </div>
             </Modal.Body>
             <Modal.Footer>
                <Button variant="secondary" onClick={handleCloseReturn}>
                   No
                </Button>
-               <Button variant="primary" onClick={handleReturnConfirm}>
+               <Button variant="primary" onClick={() => { handleReturnConfirm(); handleTotalPrice() }}>
                   Yes
                </Button>
             </Modal.Footer>

@@ -5,35 +5,32 @@ import { ContextProvider } from "../../Context/Context";
 
 const Booking = () => {
    const { show, handleClose, bookConfirm, setTotalPrice } = useContext(ContextProvider)
+   const [price, setPrice] = useState()
+   const [fromDate, setFromDate] = useState(new Date())
+   const [toDate, setToDate] = useState(new Date())
+   const [day, setDay] = useState()
 
-   const [price, setPrice] = useState(0)
-   const [fromDate, setFromDate] = useState()
-   const [toDate, setToDate] = useState()
-   const [day, setDay] = useState(1)
+   const handlePrice = (e) => {
+      setPrice(e.value)
+   }
    const handleFromDate = (e) => {
       setFromDate(e.target.value)
    }
    const handleToDate = (e) => {
       setToDate(e.target.value);
+      dayDeferent()
    }
-   const handlePrice = (e) => {
-      setPrice(e.value)
-
-   }
-
-   const handleDay = (toDate, fromDate) => {
-      const date1 = new Date(toDate);
+   const dayDeferent = () => {
       const date2 = new Date(fromDate);
+      const date1 = new Date(toDate);
       const diffTime = Math.abs(date2 - date1);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      console.log(diffDays);
       setDay(diffDays)
+
    }
-   const handleTotalPrice = (price, day) => {
+   const handleTotalPrice = () => {
       setTotalPrice(price * day)
    }
-
-
    const options = [
       { value: 4500, label: 'Air Compressor 12 GAS / p1' },
       { value: 6500, label: 'Air Compressor 5 Electric / p2' },
@@ -76,7 +73,7 @@ const Booking = () => {
                <Button variant="secondary" onClick={handleClose}>
                   No
                </Button>
-               <Button variant="primary" onClick={() => { bookConfirm(); handleTotalPrice(price, day); handleDay(toDate, fromDate) }}>
+               <Button variant="primary" onClick={() => { bookConfirm(); handleTotalPrice(); }}>
                   Yes
                </Button>
             </Modal.Footer>

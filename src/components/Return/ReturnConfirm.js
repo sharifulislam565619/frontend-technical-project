@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { ContextProvider } from '../../Context/Context';
 
 const ReturnConfirm = () => {
-   const { showReturnConfirm, handleReturnCloseConfirm, returnConfirm } = useContext(ContextProvider)
+   const { showReturnConfirm, handleReturnCloseConfirm, returnConfirm, totalPrice } = useContext(ContextProvider)
 
    return (
       <>
@@ -12,7 +12,7 @@ const ReturnConfirm = () => {
                <Modal.Title>Return a product</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-               Your total price $000 <br />
+               Your total price ${totalPrice} <br />
                Do you want to procedure?
             </Modal.Body>
             <Modal.Footer>

@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react';
 export const ContextProvider = createContext()
 
 const Context = ({ children }) => {
-   const [totalPrice, setTotalPrice] = useState(0)
+   const [totalPrice, setTotalPrice] = useState()
 
    // Booking
    const [show, setShow] = useState(false);
@@ -15,8 +15,6 @@ const Context = ({ children }) => {
       setShow2(true)
       setShow(false)
    };
-
-
    // return
    const [showReturn, setShowReturn] = useState(false);
    const [showReturnConfirm, setShowReturnConfirm] = useState(false);
@@ -25,6 +23,7 @@ const Context = ({ children }) => {
    const handleReturnConfirm = () => {
       setShowReturnConfirm(true)
       setShowReturn(false)
+      setTotalPrice(0)
    };
    const handleReturnCloseConfirm = () => setShowReturnConfirm(false);
 
